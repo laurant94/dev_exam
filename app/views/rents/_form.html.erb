@@ -38,7 +38,7 @@
     <%= form.text_area :remarks %>
   </div>
 
-  <% if rent.stations  %>
+  <% if action === "edit" %>
     <% index =0 %>
     <%= form.fields_for :stations do |p| %> 
       <hr>
@@ -55,7 +55,7 @@
 
       <div>
         <%= p.label :walk_duration, 'How many minutes walk' %> <br>
-        <%= p.text_field :walk_duration %> min/mins
+        <%= p.text_field :walk_duration, type: 'text' %> min/mins
       </div>
       <% index += 1 %>
     <% end %>
@@ -76,7 +76,7 @@
 
         <div>
           <%= p.label :walk_duration, 'How many minutes walk' %> <br>
-          <%= p.text_field :walk_duration %> min/mins
+          <%= p.text_field :walk_duration, type: 'number' %> min/mins
         </div>
       <% end %>
     <% end %>

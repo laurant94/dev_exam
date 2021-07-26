@@ -1,5 +1,5 @@
 class RentsController < ApplicationController
-  before_action :set_rent, only: %i[ show edit update destroy ]
+  before_action :set_rent, only: %i[ show update destroy ]
 
   def index
     @rents = Rent.all
@@ -14,6 +14,8 @@ class RentsController < ApplicationController
   end
 
   def edit
+    @rent = Rent.find(params[:id])
+    @rent.stations.build
   end
 
   def create
