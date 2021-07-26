@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+<h2>Property Detail</h2>
+<p>
+  <strong>Property:</strong>
+  <%= @rent.house_name %>
+</p>
+
+<p>
+  <strong>Rent:</strong>
+  <%= @rent.rent_count %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @rent.address %>
+</p>
+
+<p>
+  <strong>Building age:</strong>
+  <%= @rent.building_age %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @rent.remarks %>
+</p>
+
+
+
+<% if @rent.stations %>
+  <% index = 1  %>
+  <% @rent.stations.each  do |station| %>
+    <hr>
+    <%= content_tag('h2', "Nearest station #{index}") %>
+    <p>
+      <strong>Name of railway:</strong>
+      <%= station.nailway_name %>
+    </p>
+    <p>
+      <strong>Station name:</strong>
+      <%= station.station_name %>
+    </p>
+    <p>
+      <strong>How many minutes walk:</strong>
+      <%= "#{station.walk_duration} min/mins" %>
+    </p>
+    <% index += 1 %>
+  <% end %>
+<% end%>
+
+<%= link_to 'Edit', edit_rent_path(@rent) %> |
+<%= link_to 'Back', rents_path %>

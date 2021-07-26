@@ -1,0 +1,88 @@
+<%= form_for rent do |form| %>
+  <% if rent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rent.errors.count, "error") %> prohibited this rent from being saved:</h2>
+
+      <ul>
+      <% @rent.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2>Register property</h2>
+
+  <div class="field">
+    <%= form.label :house_name, 'Property' %> <br>
+    <%= form.text_field :house_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rent_count, 'Rent' %> <br>
+    <%= form.number_field :rent_count %> <small>RWF</small>
+  </div>
+
+  <div class="field">
+    <%= form.label :building_age, 'Building age' %> <br>
+    <%= form.number_field :building_age %> <small>year/years old</small>
+  </div>
+  
+  <div class="field">
+    <%= form.label :address, 'Address' %> <br>
+    <%= form.text_area :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remarks, 'Remark' %> <br>
+    <%= form.text_area :remarks %>
+  </div>
+
+  <% if rent.stations  %>
+    <% index =0 %>
+    <%= form.fields_for :stations do |p| %>
+      <hr>
+      <%= content_tag('h2', "Name of railway line#{index}") %>
+      <div>
+        <%= p.label :nailway, 'Name of railway line' %> <br>
+        <%= p.text_field :nailway_name %>
+      </div>
+
+      <div>
+        <%= p.label :station_name, 'Station name' %> <br>
+        <%= p.text_field :station_name %>
+      </div>
+
+      <div>
+        <%= p.label :walk_duration, 'How many minutes walk' %> <br>
+        <%= p.text_field :walk_duration %> min/mins
+      </div>
+      <% index += 1 %>
+    <% end %>
+  <% else %>
+    <% 3.times do |i| %>
+      <hr>
+      <%= content_tag('h2', "Name of railway line#{i}") %>
+      <%= form.fields_for :stations do |p| %>
+        <div>
+          <%= p.label :nailway, 'Name of railway line' %> <br>
+          <%= p.text_field :nailway_name %>
+        </div>
+
+        <div>
+          <%= p.label :station_name, 'Station name' %> <br>
+          <%= p.text_field :station_name %>
+        </div>
+
+        <div>
+          <%= p.label :walk_duration, 'How many minutes walk' %> <br>
+          <%= p.text_field :walk_duration %> min/mins
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div class="actions"> <br>
+    <%= form.submit action_text %> 
+  </div> <br>
+<% end %>
